@@ -10,7 +10,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #f0ede6;
+    background: linear-gradient(135deg, #f0ede6 0%, #e8e4dc 50%, #f0ede6 100%);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -21,26 +21,30 @@
 
   .card {
     background: #faf8f3;
-    border-radius: 24px;
+    border-radius: 28px;
     padding: 48px 52px 44px;
     max-width: 980px;
     width: 100%;
-    box-shadow: 0 6px 48px rgba(0,0,0,0.09);
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.04),
+      0 4px 16px rgba(0,0,0,0.06),
+      0 12px 48px rgba(0,0,0,0.08);
     border: 1.5px solid #e2dbd0;
   }
 
   /* ── Header ── */
   .header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 36px;
-    padding-bottom: 28px;
+    text-align: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding-bottom: 32px;
     border-bottom: 2px solid #e2dbd0;
   }
-  .header-left { display: flex; align-items: center; gap: 14px; }
   .logo-box {
-    height: 40px;
+    height: 44px;
     display: flex; align-items: center; justify-content: center;
   }
   .logo-box img {
@@ -49,21 +53,17 @@
     object-fit: contain;
   }
   .header h1 {
-    font-size: 30px; font-weight: 800; color: #111827; letter-spacing: -0.6px;
+    font-size: 32px; font-weight: 800; color: #111827; letter-spacing: -0.8px;
+    line-height: 1.2;
   }
   .callout-bubble {
-    background: #fff;
+    background: linear-gradient(135deg, #f0f0ff, #fff);
     border: 2px solid #343CED;
     border-radius: 14px;
-    padding: 10px 16px;
+    padding: 10px 20px;
     font-size: 11.5px; font-weight: 700; color: #343CED;
     text-align: center; line-height: 1.5;
-    position: relative;
-  }
-  .callout-bubble::before {
-    content: '';
-    position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
-    border: 6px solid transparent; border-right-color: #343CED;
+    display: inline-block;
   }
 
   /* ── Tree ── */
@@ -73,6 +73,12 @@
     display: flex;
     align-items: center;
     min-height: 38px;
+    padding: 1px 8px;
+    border-radius: 8px;
+    transition: background 0.15s ease;
+  }
+  .row:not(.gap):hover {
+    background: rgba(52, 60, 237, 0.03);
   }
   .row.gap { min-height: 12px; }
 
@@ -99,13 +105,14 @@
   /* Section badges */
   .badge {
     display: inline-block;
-    padding: 4px 12px;
-    border-radius: 7px;
+    padding: 5px 14px;
+    border-radius: 8px;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 700;
     font-size: 14px;
     white-space: nowrap;
     flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   .b-blue   { background: #dbeafe; color: #1d4ed8; }
   .b-purple { background: #ede9fe; color: #6d28d9; }
@@ -146,14 +153,21 @@
   .t-context  { background: #e0e7ff; color: #3730a3; border: 1.5px solid #a5b4fc; }
   .t-people   { background: #fce7f3; color: #be185d; border: 1.5px solid #f9a8d4; }
 
+  /* Tags polish */
+  .tag {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
   /* Footer */
   .footer {
-    margin-top: 36px;
-    padding-top: 22px;
+    margin-top: 40px;
+    padding-top: 24px;
     border-top: 2px solid #e2dbd0;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; color: #6b7280;
-    text-align: center; font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px; color: #6b7280;
+    text-align: center; font-weight: 600;
+    letter-spacing: -0.2px;
+    line-height: 1.6;
   }
 </style>
 </head>
@@ -162,11 +176,9 @@
 
   <!-- Header -->
   <div class="header">
-    <div class="header-left">
-      <div class="logo-box"><img src="logo.png" alt="Glean logo"></div>
-      <h1>Anatomy of Glean AI</h1>
-    </div>
-    <div class="callout-bubble">grounded in<br>your company's<br>knowledge</div>
+    <div class="logo-box"><img src="logo.png" alt="Glean logo"></div>
+    <h1>Anatomy of Glean AI</h1>
+    <div class="callout-bubble">grounded in your company's knowledge</div>
   </div>
 
   <!-- Tree -->
