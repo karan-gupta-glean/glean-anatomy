@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy of Glean AI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f0ede6;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+
+  .card {
+    background: #faf8f3;
+    border-radius: 24px;
+    padding: 48px 52px 44px;
+    max-width: 980px;
+    width: 100%;
+    box-shadow: 0 6px 48px rgba(0,0,0,0.09);
+    border: 1.5px solid #e2dbd0;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid #e2dbd0;
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo-box {
+    width: 48px; height: 48px;
+    background: #343CED;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800; color: white;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -1px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #111827; letter-spacing: -0.6px;
+  }
+  .callout-bubble {
+    background: #fff;
+    border: 2px solid #343CED;
+    border-radius: 14px;
+    padding: 10px 16px;
+    font-size: 11.5px; font-weight: 700; color: #343CED;
+    text-align: center; line-height: 1.5;
+    position: relative;
+  }
+  .callout-bubble::before {
+    content: '';
+    position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
+    border: 6px solid transparent; border-right-color: #343CED;
+  }
+
+  /* ── Tree ── */
+  .tree { font-size: 14px; }
+
+  .row {
+    display: flex;
+    align-items: center;
+    min-height: 38px;
+  }
+  .row.gap { min-height: 12px; }
+
+  .conn {
+    font-family: 'JetBrains Mono', monospace;
+    color: #9ca3af;
+    white-space: pre;
+    flex-shrink: 0;
+    font-size: 14px;
+    line-height: 38px;
+    user-select: none;
+  }
+  .icon { font-size: 17px; margin-right: 7px; flex-shrink: 0; }
+
+  .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #374151;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Section badges */
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .b-blue   { background: #dbeafe; color: #1d4ed8; }
+  .b-purple { background: #ede9fe; color: #6d28d9; }
+  .b-green  { background: #dcfce7; color: #15803d; }
+  .b-orange { background: #ffedd5; color: #c2410c; }
+  .b-teal   { background: #ccfbf1; color: #0f766e; }
+  .b-pink   { background: #fce7f3; color: #be185d; }
+  .b-indigo { background: #e0e7ff; color: #3730a3; }
+  .b-yellow { background: #fef9c3; color: #854d0e; }
+
+  /* Annotation */
+  .ann {
+    display: flex; align-items: center;
+    flex: 1; margin-left: 10px; min-width: 0; overflow: hidden;
+  }
+  .dots {
+    flex: 1; border-bottom: 2px dotted #c4bdb0;
+    margin: 0 10px; min-width: 16px;
+  }
+  .ann-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; color: #4b5563; font-weight: 500;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* Tags */
+  .tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px; font-weight: 700;
+    padding: 3px 9px; border-radius: 20px;
+    margin-left: 10px; white-space: nowrap; flex-shrink: 0;
+  }
+  .t-core     { background: #ede9fe; color: #5b21b6; border: 1.5px solid #c4b5fd; }
+  .t-auto     { background: #fef9c3; color: #a16207; border: 1.5px solid #fde047; }
+  .t-workflow { background: #ffedd5; color: #c2410c; border: 1.5px solid #fdba74; }
+  .t-sandbox  { background: #d1fae5; color: #065f46; border: 1.5px solid #6ee7b7; }
+  .t-infra    { background: #e0f2fe; color: #0369a1; border: 1.5px solid #7dd3fc; }
+  .t-context  { background: #e0e7ff; color: #3730a3; border: 1.5px solid #a5b4fc; }
+  .t-people   { background: #fce7f3; color: #be185d; border: 1.5px solid #f9a8d4; }
+
+  /* Footer */
+  .footer {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 2px solid #e2dbd0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: #6b7280;
+    text-align: center; font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-box">g</div>
+      <h1>Anatomy of Glean AI</h1>
+    </div>
+    <div class="callout-bubble">grounded in<br>your company's<br>knowledge</div>
+  </div>
+
+  <!-- Tree -->
+  <div class="tree">
+
+    <!-- ROOT -->
+    <div class="row">
+      <span class="icon">📁</span>
+      <span class="badge b-blue">glean-workspace/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">your AI-powered work operating system</span>
+      </div>
+    </div>
+
+    <!-- ══ CONNECTORS ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">🔌</span>
+      <span class="badge b-teal">connectors/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">100+ integrations that index your company's data</span>
+        <span class="tag t-infra">foundation</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">google-drive, slack, jira, confluence</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">docs, messages, tickets — all indexed and searchable</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">salesforce, github, zendesk, notion</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">CRM, code, support, wikis — every system of record</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">push-api, web-crawler, custom</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">bring any internal source into Glean's knowledge index</span>
+      </div>
+    </div>
+
+    <!-- ══ PEOPLE ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">👥</span>
+      <span class="badge b-pink">people/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">understand who works here, what they know, and how they connect</span>
+        <span class="tag t-people">org intelligence</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">org-graph</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">org chart, reporting lines, teams — always up to date</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">expertise-finder</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">find the right person for any topic based on what they've written and built</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">personal-graph</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">learns your role, projects, and writing style to personalize every answer</span>
+      </div>
+    </div>
+
+    <!-- ══ ASSISTANT ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">💬</span>
+      <span class="badge b-purple">assistant/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">always-on AI companion powered by your company's knowledge</span>
+        <span class="tag t-core">core</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">chat</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">natural language Q&amp;A with cited answers from real internal sources</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">search</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">semantic search across every connected app in one place</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">canvas</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">collaborative workspace — draft docs, build apps, generate slides, all in Glean</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">permissions-aware index</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">users only see what they'd see natively in each source app</span>
+      </div>
+    </div>
+
+    <!-- ══ SKILLS ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">✨</span>
+      <span class="badge b-green">skills/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">reusable SKILL.md instruction sets — auto-invoked by intent</span>
+        <span class="tag t-auto">auto-triggered</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="icon">📂</span>
+      <span class="name">account-planning/</span>
+    </div>
+    <div class="row">
+      <span class="conn">│   │   └── </span>
+      <span class="name">SKILL.md</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">→ "build me an account plan for [customer]"</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="icon">📂</span>
+      <span class="name">outreach-drafting/</span>
+    </div>
+    <div class="row">
+      <span class="conn">│   │   └── </span>
+      <span class="name">SKILL.md</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">→ "draft a cold email to [prospect]"</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="icon">📂</span>
+      <span class="name">your-workflow/</span>
+    </div>
+    <div class="row">
+      <span class="conn">│       └── </span>
+      <span class="name">SKILL.md</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">→ any repeatable task your team runs — codified once, reused forever</span>
+      </div>
+    </div>
+
+    <!-- ══ AGENTS ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">🧠</span>
+      <span class="badge b-orange">agents/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">automate complex workflows — governed, scoped, with their own identity</span>
+        <span class="tag t-workflow">workflow automation</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">[agent].instructions</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">system prompt defining the agent's role, tone, and behavior</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">[agent].data-sources</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">which connectors &amp; collections this agent has access to</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">[agent].tools</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">what actions it can take — search, write, call APIs, trigger workflows</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">[agent].triggers</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">runs on schedule, on event, or when assistant routes to it automatically</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">[agent].identity</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">name, avatar, suggested prompts — deployed to any team</span>
+      </div>
+    </div>
+
+    <!-- ══ AGENTIC SANDBOX ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">🔬</span>
+      <span class="badge b-teal">agentic-sandbox/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">safe, isolated execution engine powering multi-step agentic tasks</span>
+        <span class="tag t-sandbox">sandboxed</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">tool-calls</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">reads &amp; writes to Salesforce, Jira, Slack, Sheets, and more</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">code-execution</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">runs scripts, transforms data, generates files — all isolated</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">web-browsing</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">retrieves live external context when company knowledge isn't enough</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">multi-step-planner</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">chains search → reason → act into end-to-end autonomous workflows</span>
+      </div>
+    </div>
+
+    <!-- ══ MCP + API ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">└── </span>
+      <span class="icon">🔗</span>
+      <span class="badge b-indigo">mcp + api/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">Glean as the system of context — plug in wherever your team already works</span>
+        <span class="tag t-context">open platform</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">    ├── </span>
+      <span class="name">glean-mcp-server</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">bring Glean context into Claude, Cursor, ChatGPT, Copilot, and any MCP client</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">    ├── </span>
+      <span class="name">rest-api</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">embed Glean search, chat, and agents into any internal app or workflow</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">    └── </span>
+      <span class="name">3p-agent-registry</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">register external agents (LangGraph, N8N, ADK) — governed through Glean</span>
+      </div>
+    </div>
+
+  </div><!-- /tree -->
+
+  <!-- Footer -->
+  <div class="footer">
+    Everything your team needs to know, build, and act — in one place.
+  </div>
+
+</div>
+</body>
+</html>
