@@ -160,6 +160,36 @@
   .t-govern   { background: #fee2e2; color: #b91c1c; border: 1.5px solid #fca5a5; }
   .t-beta     { background: #cffafe; color: #0e7490; border: 1.5px solid #67e8f9; }
 
+  /* Subtitle */
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px; color: #4b5563;
+    font-weight: 500;
+    line-height: 1.7;
+    text-align: center;
+    max-width: 680px;
+  }
+
+  /* CTA button */
+  .cta-btn {
+    display: inline-block;
+    background: #343CED;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 2px 8px rgba(52, 60, 237, 0.25);
+  }
+  .cta-btn:hover {
+    background: #2a31d4;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(52, 60, 237, 0.35);
+  }
+
   /* Footer */
   .footer {
     margin-top: 40px;
@@ -178,8 +208,9 @@
 
   <!-- Header -->
   <div class="header">
-    <div class="logo-box"><img src="logo.png" alt="Glean logo"></div>
+    <a href="https://www.glean.com" target="_blank" rel="noopener" class="logo-box"><img src="logo.png" alt="Glean logo"></a>
     <h1>Anatomy of Glean AI</h1>
+    <p class="subtitle">Glean is the Work AI platform that connects to all your company's data — documents, messages, tickets, code, and more — to deliver a secure, personalized AI assistant that understands your business.</p>
     <div class="callout-bubble">grounded in your company's knowledge</div>
   </div>
 
@@ -790,7 +821,9 @@
   <!-- Footer -->
   <div class="footer">
     Everything your team needs to know, build, and act — in one place.
-    <br>
+    <br><br>
+    <a href="https://www.glean.com/request-demo" target="_blank" rel="noopener" class="cta-btn">Request a Demo</a>
+    <br><br>
     <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V1.1 — Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
   </div>
 
