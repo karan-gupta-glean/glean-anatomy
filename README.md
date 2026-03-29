@@ -18,9 +18,8 @@ It covers:
 | **assistant/** | Glean's third-generation AI assistant — chat, search, canvas, voice, branded slides, proactive insights |
 | **model-hub/** | LLM choice across 15+ models with fast vs. thinking modes |
 | **skills/** | The open Agent Skills standard — personal, company, and ecosystem-level reusable instructions |
-| **agents/** | Workflow automation — no-code builder, agentic engine 2, orchestration, pre-built agents |
+| **agents/** | Workflow automation — no-code builder, agentic engine 2, orchestration, pre-built agents, embedded integrations |
 | **agent-sandbox/** | Secure isolated runtime (AFS) with filesystem, shell, code interpreter, and programmatic tool calling (PTC) |
-| **apps/** | No-code custom AI apps and embedded agents in Slack, Teams, Salesforce |
 | **governance/** | Data scanning, infotype detection, agent permissions, security partner ecosystem |
 | **mcp + api/** | MCP server/host/directory, 100+ native actions, tool search, REST API, 3rd-party agent registry |
 
