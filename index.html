@@ -23,7 +23,7 @@
     background: #faf8f3;
     border-radius: 28px;
     padding: 48px 52px 44px;
-    max-width: 980px;
+    max-width: 1020px;
     width: 100%;
     box-shadow:
       0 1px 2px rgba(0,0,0,0.04),
@@ -122,6 +122,9 @@
   .b-pink   { background: #fce7f3; color: #be185d; }
   .b-indigo { background: #e0e7ff; color: #3730a3; }
   .b-yellow { background: #fef9c3; color: #854d0e; }
+  .b-red    { background: #fee2e2; color: #b91c1c; }
+  .b-slate  { background: #e2e8f0; color: #334155; }
+  .b-cyan   { background: #cffafe; color: #0e7490; }
 
   /* Annotation */
   .ann {
@@ -144,6 +147,7 @@
     font-size: 10.5px; font-weight: 700;
     padding: 3px 9px; border-radius: 20px;
     margin-left: 10px; white-space: nowrap; flex-shrink: 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
   .t-core     { background: #ede9fe; color: #5b21b6; border: 1.5px solid #c4b5fd; }
   .t-auto     { background: #fef9c3; color: #a16207; border: 1.5px solid #fde047; }
@@ -152,11 +156,9 @@
   .t-infra    { background: #e0f2fe; color: #0369a1; border: 1.5px solid #7dd3fc; }
   .t-context  { background: #e0e7ff; color: #3730a3; border: 1.5px solid #a5b4fc; }
   .t-people   { background: #fce7f3; color: #be185d; border: 1.5px solid #f9a8d4; }
-
-  /* Tags polish */
-  .tag {
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  }
+  .t-new      { background: #dcfce7; color: #15803d; border: 1.5px solid #86efac; }
+  .t-govern   { background: #fee2e2; color: #b91c1c; border: 1.5px solid #fca5a5; }
+  .t-beta     { background: #cffafe; color: #0e7490; border: 1.5px solid #67e8f9; }
 
   /* Footer */
   .footer {
@@ -223,11 +225,92 @@
       </div>
     </div>
     <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">structured-data (SOQL, JQL, Databricks)</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">query live structured data with natural language</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
       <span class="conn">│   └── </span>
       <span class="name">push-api, web-crawler, custom</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">bring any internal source into Glean's knowledge index</span>
+      </div>
+    </div>
+
+    <!-- ══ ENTERPRISE GRAPH ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">🕸️</span>
+      <span class="badge b-yellow">enterprise-graph/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">the intelligence layer — maps relationships between content, people, and activity</span>
+        <span class="tag t-infra">foundation</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">entity-extraction</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">identifies people, projects, products, and topics across all docs</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">relationship-mapping</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">connects documents to authors, teams, topics, and related content</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">activity-signals</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">views, edits, shares — learns what's relevant and what's stale</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">personal-graph</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">per-employee graph of tasks, projects, collaborators, and work style</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">enterprise-memory</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">persistent memory layer that retains context across sessions</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">universal-knowledge</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">combines enterprise data with real-time world knowledge</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">permissions-layer</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">every edge in the graph respects source-level access control</span>
       </div>
     </div>
 
@@ -268,59 +351,6 @@
       </div>
     </div>
 
-    <!-- ══ KNOWLEDGE GRAPH ══ -->
-    <div class="row gap"></div>
-    <div class="row">
-      <span class="conn">├── </span>
-      <span class="icon">🕸️</span>
-      <span class="badge b-yellow">knowledge-graph/</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">the connective tissue — maps relationships between content, people, and activity</span>
-        <span class="tag t-infra">foundation</span>
-      </div>
-    </div>
-    <div class="row">
-      <span class="conn">│   ├── </span>
-      <span class="name">entity-extraction</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">identifies people, projects, products, and topics mentioned across all docs</span>
-      </div>
-    </div>
-    <div class="row">
-      <span class="conn">│   ├── </span>
-      <span class="name">relationship-mapping</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">connects documents to authors, teams, topics, and related content</span>
-      </div>
-    </div>
-    <div class="row">
-      <span class="conn">│   ├── </span>
-      <span class="name">activity-signals</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">views, edits, shares — learns what's relevant and what's stale</span>
-      </div>
-    </div>
-    <div class="row">
-      <span class="conn">│   ├── </span>
-      <span class="name">content-clustering</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">groups related documents and surfaces topic hierarchies automatically</span>
-      </div>
-    </div>
-    <div class="row">
-      <span class="conn">│   └── </span>
-      <span class="name">permissions-layer</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">every edge in the graph respects source-level access control</span>
-      </div>
-    </div>
-
     <!-- ══ ASSISTANT ══ -->
     <div class="row gap"></div>
     <div class="row">
@@ -329,7 +359,7 @@
       <span class="badge b-purple">assistant/</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">always-on AI companion powered by your company's knowledge</span>
+        <span class="ann-text">third-generation AI companion powered by your company's knowledge</span>
         <span class="tag t-core">core</span>
       </div>
     </div>
@@ -354,15 +384,71 @@
       <span class="name">canvas</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">collaborative workspace — draft docs, build apps, generate slides, all in Glean</span>
+        <span class="ann-text">collaborative workspace — draft docs, build apps, generate slides</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">real-time-voice</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">hands-free spoken interaction with the assistant</span>
+        <span class="tag t-beta">beta</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">branded-slides</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">AI-generated presentations aligned with your brand guidelines</span>
+        <span class="tag t-beta">beta</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">proactive-insights</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">surfaces relevant info before you ask — summaries, action items, reminders</span>
+        <span class="tag t-new">new</span>
       </div>
     </div>
     <div class="row">
       <span class="conn">│   └── </span>
-      <span class="name">permissions-aware index</span>
+      <span class="name">permissions-aware-index</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">users only see what they'd see natively in each source app</span>
+      </div>
+    </div>
+
+    <!-- ══ MODEL HUB ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">🧬</span>
+      <span class="badge b-cyan">model-hub/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">15+ LLMs — choose the right model for every task</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">llm-choice</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">switch between OpenAI, Google, Anthropic, Meta, Amazon in real time</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">fast-vs-thinking</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">toggle quick responses vs. extended reasoning per query</span>
       </div>
     </div>
 
@@ -374,47 +460,44 @@
       <span class="badge b-green">skills/</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">reusable SKILL.md instruction sets — auto-invoked by intent</span>
+        <span class="ann-text">reusable instruction sets — the open Agent Skills standard</span>
         <span class="tag t-auto">auto-triggered</span>
       </div>
     </div>
     <div class="row">
       <span class="conn">│   ├── </span>
       <span class="icon">📂</span>
-      <span class="name">account-planning/</span>
-    </div>
-    <div class="row">
-      <span class="conn">│   │   └── </span>
-      <span class="name">SKILL.md</span>
+      <span class="name">personal-skills/</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">→ "build me an account plan for [customer]"</span>
+        <span class="ann-text">employee-created skills for individual workflows</span>
       </div>
     </div>
     <div class="row">
       <span class="conn">│   ├── </span>
       <span class="icon">📂</span>
-      <span class="name">outreach-drafting/</span>
-    </div>
-    <div class="row">
-      <span class="conn">│   │   └── </span>
-      <span class="name">SKILL.md</span>
+      <span class="name">company-skills/</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">→ "draft a cold email to [prospect]"</span>
+        <span class="ann-text">published, shared skill libraries across the org</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="icon">📂</span>
+      <span class="name">ecosystem-skills/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">bring in skills from the broader ecosystem</span>
+        <span class="tag t-new">new</span>
       </div>
     </div>
     <div class="row">
       <span class="conn">│   └── </span>
-      <span class="icon">📂</span>
-      <span class="name">your-workflow/</span>
-    </div>
-    <div class="row">
-      <span class="conn">│       └── </span>
       <span class="name">SKILL.md</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">→ any repeatable task your team runs — codified once, reused forever</span>
+        <span class="ann-text">routing metadata + examples — codified once, reused forever</span>
       </div>
     </div>
 
@@ -428,6 +511,24 @@
         <div class="dots"></div>
         <span class="ann-text">automate complex workflows — governed, scoped, with their own identity</span>
         <span class="tag t-workflow">workflow automation</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">no-code-builder</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">describe what you want in plain English — visual graph-based editor</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">agentic-engine-2</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">next-gen reasoning — adaptive planning, Enterprise Graph-first signals</span>
+        <span class="tag t-new">new</span>
       </div>
     </div>
     <div class="row">
@@ -463,32 +564,59 @@
       </div>
     </div>
     <div class="row">
-      <span class="conn">│   └── </span>
+      <span class="conn">│   ├── </span>
       <span class="name">[agent].identity</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">name, avatar, suggested prompts — deployed to any team</span>
       </div>
     </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">orchestration</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">event triggers, inter-agent routing, cross-system execution</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">pre-built-agents</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">dozens of out-of-the-box agents for common enterprise workflows</span>
+      </div>
+    </div>
 
-    <!-- ══ AGENTIC SANDBOX ══ -->
+    <!-- ══ AGENT SANDBOX ══ -->
     <div class="row gap"></div>
     <div class="row">
       <span class="conn">├── </span>
       <span class="icon">🔬</span>
-      <span class="badge b-teal">agentic-sandbox/</span>
+      <span class="badge b-teal">agent-sandbox/</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">safe, isolated execution engine powering multi-step agentic tasks</span>
+        <span class="ann-text">secure, isolated runtime that gives Assistant a virtual computer for multi-step analysis</span>
         <span class="tag t-sandbox">sandboxed</span>
       </div>
     </div>
     <div class="row">
       <span class="conn">│   ├── </span>
-      <span class="name">tool-calls</span>
+      <span class="name">AFS (agent-function-service)</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">reads &amp; writes to Salesforce, Jira, Slack, Sheets, and more</span>
+        <span class="ann-text">sandboxed runtime — isolated pods with filesystem, shell, and persistent state</span>
+        <span class="tag t-infra">runtime</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">PTC (programmatic-tool-calling)</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">call tools directly from sandbox code — fewer round trips, faster workflows</span>
+        <span class="tag t-new">new</span>
       </div>
     </div>
     <div class="row">
@@ -496,7 +624,23 @@
       <span class="name">code-execution</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">runs scripts, transforms data, generates files — all isolated</span>
+        <span class="ann-text">Python interpreter, shell commands, data transforms — all session-isolated</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">file-system</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">read, write, upload, download artifacts — persistent across turns</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">pause-resume-snapshots</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">persist sandbox state across sessions with snapshot &amp; restore</span>
       </div>
     </div>
     <div class="row">
@@ -513,6 +657,80 @@
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">chains search → reason → act into end-to-end autonomous workflows</span>
+      </div>
+    </div>
+
+    <!-- ══ APPS ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">📱</span>
+      <span class="badge b-slate">apps/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">no-code custom AI apps, assistants, and copilots</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">app-builder</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">build generative AI chatbots and tools without writing code</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">embedded-agents</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">deploy agents inside Slack, Teams, Salesforce, Zendesk</span>
+      </div>
+    </div>
+
+    <!-- ══ GOVERNANCE ══ -->
+    <div class="row gap"></div>
+    <div class="row">
+      <span class="conn">├── </span>
+      <span class="icon">🛡️</span>
+      <span class="badge b-red">governance/</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">active data &amp; AI governance — control, compliance, and trust</span>
+        <span class="tag t-govern">security</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">data-scanning</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">continuous scanning &amp; remediation of overshared sensitive data</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">infotype-detection</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">100+ predefined infotypes — SSNs, credentials, PII, custom terms</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   ├── </span>
+      <span class="name">agent-permissions</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">granular sharing, scoping, and sprawl prevention for all agents</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">│   └── </span>
+      <span class="name">security-partners</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">BigID, Cisco, Palo Alto, Rubrik, Virtue AI — open partner program</span>
       </div>
     </div>
 
@@ -534,6 +752,41 @@
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">bring Glean context into Claude, Cursor, ChatGPT, Copilot, and any MCP client</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">    ├── </span>
+      <span class="name">mcp-host</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">Glean agents call external MCP servers for cross-platform actions</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">    ├── </span>
+      <span class="name">mcp-server-directory</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">20+ curated, validated, ready-to-use MCP servers</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">    ├── </span>
+      <span class="name">native-actions (100+)</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">read &amp; write to Salesforce, Jira, GitHub, Calendar, and more</span>
+      </div>
+    </div>
+    <div class="row">
+      <span class="conn">    ├── </span>
+      <span class="name">tool-search</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">agents auto-identify the most relevant tools based on task intent</span>
+        <span class="tag t-new">new</span>
       </div>
     </div>
     <div class="row">
