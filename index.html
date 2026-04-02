@@ -66,6 +66,58 @@
     display: inline-block;
   }
 
+  /* ── Filter bar ── */
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-right: 6px;
+  }
+  .filter-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: 2px solid #e2dbd0;
+    background: #fff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .filter-btn:hover {
+    border-color: #c7d2fe;
+    color: #343CED;
+    background: #f8f7ff;
+  }
+  .filter-btn.active {
+    border-color: #343CED;
+    background: #343CED;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(52, 60, 237, 0.25);
+  }
+  .filter-desc {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #9ca3af;
+    margin-bottom: 24px;
+    min-height: 18px;
+    transition: opacity 0.2s ease;
+  }
+
   /* ── Tree ── */
   .tree { font-size: 14px; }
 
@@ -75,12 +127,24 @@
     min-height: 38px;
     padding: 1px 8px;
     border-radius: 8px;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, opacity 0.3s ease;
   }
   .row:not(.gap):hover {
     background: rgba(52, 60, 237, 0.03);
   }
   .row.gap { min-height: 12px; }
+
+  /* Dimmed state for filtered rows */
+  .row.dimmed {
+    opacity: 0.15;
+  }
+  .row.dimmed:hover {
+    opacity: 0.35;
+  }
+  /* Highlighted state */
+  .row.highlighted {
+    background: rgba(52, 60, 237, 0.04);
+  }
 
   .conn {
     font-family: 'JetBrains Mono', monospace;
@@ -201,6 +265,20 @@
     letter-spacing: -0.2px;
     line-height: 1.6;
   }
+
+  /* Persona count badge */
+  .persona-count {
+    display: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 6px;
+    margin-left: 8px;
+    background: #343CED;
+    color: #fff;
+  }
+  .filtering .persona-count { display: inline-block; }
 </style>
 </head>
 <body>
@@ -214,11 +292,22 @@
     <div class="callout-bubble">grounded in your company's knowledge</div>
   </div>
 
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span class="filter-label">View as:</span>
+    <button class="filter-btn active" data-persona="all">All</button>
+    <button class="filter-btn" data-persona="superadmin">Super Admin</button>
+    <button class="filter-btn" data-persona="admin">Admin</button>
+    <button class="filter-btn" data-persona="poweruser">Power User</button>
+    <button class="filter-btn" data-persona="general">General User</button>
+  </div>
+  <div class="filter-desc" id="filterDesc"></div>
+
   <!-- Tree -->
-  <div class="tree">
+  <div class="tree" id="tree">
 
     <!-- ROOT -->
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="icon">📁</span>
       <span class="badge b-blue">glean-workspace/</span>
       <div class="ann">
@@ -229,7 +318,7 @@
 
     <!-- ══ CONNECTORS ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">├── </span>
       <span class="icon">🔌</span>
       <span class="badge b-teal">connectors/</span>
@@ -239,7 +328,7 @@
         <span class="tag t-infra">foundation</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">google-drive, slack, jira, confluence</span>
       <div class="ann">
@@ -247,7 +336,7 @@
         <span class="ann-text">docs, messages, tickets — all indexed and searchable</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">salesforce, github, zendesk, notion</span>
       <div class="ann">
@@ -255,7 +344,7 @@
         <span class="ann-text">CRM, code, support, wikis — every system of record</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin">
       <span class="conn">│   ├── </span>
       <span class="name">structured-data (SOQL, JQL, Databricks)</span>
       <div class="ann">
@@ -264,7 +353,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   └── </span>
       <span class="name">push-api, web-crawler, custom</span>
       <div class="ann">
@@ -275,7 +364,7 @@
 
     <!-- ══ ENTERPRISE GRAPH ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">├── </span>
       <span class="icon">🕸️</span>
       <span class="badge b-yellow">enterprise-graph/</span>
@@ -285,7 +374,7 @@
         <span class="tag t-infra">foundation</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin">
       <span class="conn">│   ├── </span>
       <span class="name">entity-extraction</span>
       <div class="ann">
@@ -293,7 +382,7 @@
         <span class="ann-text">identifies people, projects, products, and topics across all docs</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin">
       <span class="conn">│   ├── </span>
       <span class="name">relationship-mapping</span>
       <div class="ann">
@@ -301,7 +390,7 @@
         <span class="ann-text">connects documents to authors, teams, topics, and related content</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">activity-signals</span>
       <div class="ann">
@@ -309,7 +398,7 @@
         <span class="ann-text">views, edits, shares — learns what's relevant and what's stale</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">personal-graph</span>
       <div class="ann">
@@ -318,7 +407,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">enterprise-memory</span>
       <div class="ann">
@@ -327,7 +416,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">universal-knowledge</span>
       <div class="ann">
@@ -336,7 +425,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   └── </span>
       <span class="name">permissions-layer</span>
       <div class="ann">
@@ -347,7 +436,7 @@
 
     <!-- ══ PEOPLE ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">├── </span>
       <span class="icon">👥</span>
       <span class="badge b-pink">people/</span>
@@ -357,7 +446,7 @@
         <span class="tag t-people">org intelligence</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">org-graph</span>
       <div class="ann">
@@ -365,7 +454,7 @@
         <span class="ann-text">org chart, reporting lines, teams — always up to date</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">expertise-finder</span>
       <div class="ann">
@@ -373,7 +462,7 @@
         <span class="ann-text">find the right person for any topic based on what they've written and built</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   └── </span>
       <span class="name">personal-graph</span>
       <div class="ann">
@@ -384,7 +473,7 @@
 
     <!-- ══ ASSISTANT ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">├── </span>
       <span class="icon">💬</span>
       <span class="badge b-purple">assistant/</span>
@@ -394,7 +483,7 @@
         <span class="tag t-core">core</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">chat</span>
       <div class="ann">
@@ -402,7 +491,7 @@
         <span class="ann-text">natural language Q&amp;A with cited answers from real internal sources</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">search</span>
       <div class="ann">
@@ -410,7 +499,7 @@
         <span class="ann-text">semantic search across every connected app in one place</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">canvas</span>
       <div class="ann">
@@ -418,7 +507,7 @@
         <span class="ann-text">collaborative workspace — draft docs, build apps, generate slides</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">real-time-voice</span>
       <div class="ann">
@@ -427,7 +516,7 @@
         <span class="tag t-beta">beta</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">branded-slides</span>
       <div class="ann">
@@ -436,7 +525,7 @@
         <span class="tag t-beta">beta</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">proactive-insights</span>
       <div class="ann">
@@ -445,7 +534,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   └── </span>
       <span class="name">permissions-aware-index</span>
       <div class="ann">
@@ -456,7 +545,7 @@
 
     <!-- ══ MODEL HUB ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">├── </span>
       <span class="icon">🧬</span>
       <span class="badge b-cyan">model-hub/</span>
@@ -466,7 +555,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">llm-choice</span>
       <div class="ann">
@@ -474,7 +563,7 @@
         <span class="ann-text">switch between OpenAI, Google, Anthropic, Meta, Amazon in real time</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   └── </span>
       <span class="name">fast-vs-thinking</span>
       <div class="ann">
@@ -485,7 +574,7 @@
 
     <!-- ══ SKILLS ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">├── </span>
       <span class="icon">✨</span>
       <span class="badge b-green">skills/</span>
@@ -495,7 +584,7 @@
         <span class="tag t-auto">auto-triggered</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="icon">📂</span>
       <span class="name">personal-skills/</span>
@@ -504,7 +593,7 @@
         <span class="ann-text">employee-created skills for individual workflows</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   ├── </span>
       <span class="icon">📂</span>
       <span class="name">company-skills/</span>
@@ -513,7 +602,7 @@
         <span class="ann-text">published, shared skill libraries across the org</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   ├── </span>
       <span class="icon">📂</span>
       <span class="name">ecosystem-skills/</span>
@@ -523,7 +612,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   └── </span>
       <span class="name">SKILL.md</span>
       <div class="ann">
@@ -534,7 +623,7 @@
 
     <!-- ══ AGENTS ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">├── </span>
       <span class="icon">🧠</span>
       <span class="badge b-orange">agents/</span>
@@ -544,7 +633,7 @@
         <span class="tag t-workflow">workflow automation</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   ├── </span>
       <span class="name">no-code-builder</span>
       <div class="ann">
@@ -553,7 +642,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">agentic-engine-2</span>
       <div class="ann">
@@ -562,7 +651,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   ├── </span>
       <span class="name">[agent].instructions</span>
       <div class="ann">
@@ -570,7 +659,7 @@
         <span class="ann-text">system prompt defining the agent's role, tone, and behavior</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">[agent].data-sources</span>
       <div class="ann">
@@ -578,7 +667,7 @@
         <span class="ann-text">which connectors &amp; collections this agent has access to</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   ├── </span>
       <span class="name">[agent].tools</span>
       <div class="ann">
@@ -586,7 +675,7 @@
         <span class="ann-text">what actions it can take — search, write, call APIs, trigger workflows</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">[agent].triggers</span>
       <div class="ann">
@@ -594,7 +683,7 @@
         <span class="ann-text">runs on schedule, on event, or when assistant routes to it automatically</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   ├── </span>
       <span class="name">[agent].identity</span>
       <div class="ann">
@@ -602,7 +691,7 @@
         <span class="ann-text">name, avatar, suggested prompts — deployed to any team</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">orchestration</span>
       <div class="ann">
@@ -611,7 +700,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">pre-built-agents</span>
       <div class="ann">
@@ -619,7 +708,7 @@
         <span class="ann-text">dozens of out-of-the-box agents for common enterprise workflows</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   └── </span>
       <span class="name">embedded-integrations</span>
       <div class="ann">
@@ -630,7 +719,7 @@
 
     <!-- ══ AGENT SANDBOX ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">├── </span>
       <span class="icon">🔬</span>
       <span class="badge b-teal">agent-sandbox/</span>
@@ -640,7 +729,7 @@
         <span class="tag t-sandbox">sandboxed</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin">
       <span class="conn">│   ├── </span>
       <span class="name">AFS (agent-function-service)</span>
       <div class="ann">
@@ -649,7 +738,7 @@
         <span class="tag t-infra">runtime</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   ├── </span>
       <span class="name">PTC (programmatic-tool-calling)</span>
       <div class="ann">
@@ -658,7 +747,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   ├── </span>
       <span class="name">code-execution</span>
       <div class="ann">
@@ -666,7 +755,7 @@
         <span class="ann-text">Python interpreter, shell commands, data transforms — all session-isolated</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">file-system</span>
       <div class="ann">
@@ -674,7 +763,7 @@
         <span class="ann-text">read, write, upload, download artifacts — persistent across turns</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">pause-resume-snapshots</span>
       <div class="ann">
@@ -682,7 +771,7 @@
         <span class="ann-text">persist sandbox state across sessions with snapshot &amp; restore</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
       <span class="name">web-browsing</span>
       <div class="ann">
@@ -690,7 +779,7 @@
         <span class="ann-text">retrieves live external context when company knowledge isn't enough</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">│   └── </span>
       <span class="name">multi-step-planner</span>
       <div class="ann">
@@ -701,7 +790,7 @@
 
     <!-- ══ GOVERNANCE ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">├── </span>
       <span class="icon">🛡️</span>
       <span class="badge b-red">governance/</span>
@@ -711,7 +800,7 @@
         <span class="tag t-govern">security</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">data-scanning</span>
       <div class="ann">
@@ -719,7 +808,7 @@
         <span class="ann-text">continuous scanning &amp; remediation of overshared sensitive data</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">infotype-detection</span>
       <div class="ann">
@@ -727,7 +816,7 @@
         <span class="ann-text">100+ predefined infotypes — SSNs, credentials, PII, custom terms</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
       <span class="name">agent-permissions</span>
       <div class="ann">
@@ -735,7 +824,7 @@
         <span class="ann-text">granular sharing, scoping, and sprawl prevention for all agents</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   └── </span>
       <span class="name">security-partners</span>
       <div class="ann">
@@ -746,7 +835,7 @@
 
     <!-- ══ MCP + API ══ -->
     <div class="row gap"></div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">└── </span>
       <span class="icon">🔗</span>
       <span class="badge b-indigo">mcp + api/</span>
@@ -756,7 +845,7 @@
         <span class="tag t-context">open platform</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">    ├── </span>
       <span class="name">glean-mcp-server</span>
       <div class="ann">
@@ -764,7 +853,7 @@
         <span class="ann-text">bring Glean context into Claude, Cursor, ChatGPT, Copilot, and any MCP client</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">    ├── </span>
       <span class="name">mcp-host</span>
       <div class="ann">
@@ -773,7 +862,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">    ├── </span>
       <span class="name">mcp-server-directory</span>
       <div class="ann">
@@ -782,7 +871,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">    ├── </span>
       <span class="name">native-actions (100+)</span>
       <div class="ann">
@@ -790,7 +879,7 @@
         <span class="ann-text">read &amp; write to Salesforce, Jira, GitHub, Calendar, and more</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">    ├── </span>
       <span class="name">tool-search</span>
       <div class="ann">
@@ -799,7 +888,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">    ├── </span>
       <span class="name">rest-api</span>
       <div class="ann">
@@ -807,7 +896,7 @@
         <span class="ann-text">embed Glean search, chat, and agents into any internal app or workflow</span>
       </div>
     </div>
-    <div class="row">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">    └── </span>
       <span class="name">3p-agent-registry</span>
       <div class="ann">
@@ -824,9 +913,68 @@
     <br><br>
     <a href="https://www.glean.com/product/overview" target="_blank" rel="noopener" class="cta-btn">Explore the Platform</a>
     <br><br>
-    <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V1.1 — Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
+    <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V1.2 — Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
   </div>
 
 </div>
+
+<script>
+  const descriptions = {
+    all: '',
+    superadmin: 'Full platform visibility — connectors, graph, governance, sandbox, MCP, and all configuration',
+    admin: 'Connector setup, governance, agent management, model selection, and org-wide skill publishing',
+    poweruser: 'Agent building, skill creation, sandbox workflows, MCP integrations, and advanced assistant features',
+    general: 'Search, chat, canvas, voice, personal skills, people lookup, and pre-built agents'
+  };
+
+  const buttons = document.querySelectorAll('.filter-btn');
+  const rows = document.querySelectorAll('.row[data-personas]');
+  const gaps = document.querySelectorAll('.row.gap');
+  const descEl = document.getElementById('filterDesc');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const persona = btn.dataset.persona;
+
+      // Update active button
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Update description
+      descEl.textContent = descriptions[persona];
+
+      if (persona === 'all') {
+        // Reset all
+        rows.forEach(r => {
+          r.classList.remove('dimmed', 'highlighted');
+        });
+        gaps.forEach(g => g.classList.remove('dimmed'));
+        return;
+      }
+
+      // Apply filter
+      rows.forEach(r => {
+        const personas = r.dataset.personas;
+        if (personas && personas.includes(persona)) {
+          r.classList.remove('dimmed');
+          r.classList.add('highlighted');
+        } else {
+          r.classList.add('dimmed');
+          r.classList.remove('highlighted');
+        }
+      });
+
+      // Dim gaps that are between dimmed sections
+      gaps.forEach(g => {
+        const next = g.nextElementSibling;
+        if (next && next.classList.contains('dimmed')) {
+          g.classList.add('dimmed');
+        } else {
+          g.classList.remove('dimmed');
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
