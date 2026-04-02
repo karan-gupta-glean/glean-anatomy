@@ -39,7 +39,7 @@
     align-items: center;
     text-align: center;
     gap: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     padding-bottom: 32px;
     border-bottom: 2px solid #e2dbd0;
   }
@@ -66,13 +66,57 @@
     display: inline-block;
   }
 
-  /* ── Filter bar ── */
-  .filter-bar {
+  /* ── Jump-to nav ── */
+  .jump-nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .jump-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-right: 4px;
+  }
+  .jump-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1.5px solid #e2dbd0;
+    background: #fff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .jump-btn:hover {
+    border-color: #343CED;
+    color: #343CED;
+    background: #f8f7ff;
+  }
+
+  /* ── Controls bar (filter + what's new) ── */
+  .controls-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .filter-bar {
+    display: flex;
+    align-items: center;
     gap: 8px;
-    margin-bottom: 32px;
     flex-wrap: wrap;
   }
   .filter-label {
@@ -82,13 +126,13 @@
     color: #9ca3af;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-right: 6px;
+    margin-right: 4px;
   }
   .filter-btn {
     font-family: 'Inter', sans-serif;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 700;
-    padding: 8px 18px;
+    padding: 7px 16px;
     border-radius: 10px;
     border: 2px solid #e2dbd0;
     background: #fff;
@@ -108,18 +152,105 @@
     color: #fff;
     box-shadow: 0 2px 8px rgba(52, 60, 237, 0.25);
   }
+
+  /* What's New toggle */
+  .whats-new-toggle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 10px;
+    border: 2px solid #86efac;
+    background: #fff;
+    color: #15803d;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .whats-new-toggle:hover {
+    background: #f0fdf4;
+  }
+  .whats-new-toggle.active {
+    border-color: #15803d;
+    background: #15803d;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(21, 128, 61, 0.25);
+  }
+  .whats-new-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #15803d;
+    display: inline-block;
+  }
+  .whats-new-toggle.active .whats-new-dot { background: #fff; }
+
+  /* Filter description */
   .filter-desc {
     text-align: center;
     font-size: 12px;
     font-weight: 500;
-    color: #9ca3af;
-    margin-bottom: 24px;
-    min-height: 18px;
+    color: #6b7280;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 6px 16px;
+    background: rgba(52, 60, 237, 0.03);
+    border-radius: 8px;
     transition: opacity 0.2s ease;
+    line-height: 1.5;
+  }
+  .filter-desc:empty {
+    background: none;
+    margin-bottom: 12px;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 12px 20px;
+    background: #fff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    white-space: nowrap;
+  }
+  .legend-item .tag {
+    margin-left: 0;
+    font-size: 9.5px;
+    padding: 2px 7px;
+  }
+  .legend-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
   }
 
   /* ── Tree ── */
   .tree { font-size: 14px; }
+
+  .section-anchor {
+    display: block;
+    position: relative;
+    top: -20px;
+    visibility: hidden;
+  }
 
   .row {
     display: flex;
@@ -134,16 +265,25 @@
   }
   .row.gap { min-height: 12px; }
 
-  /* Dimmed state for filtered rows */
+  /* Dimmed state */
   .row.dimmed {
-    opacity: 0.15;
+    opacity: 0.12;
   }
   .row.dimmed:hover {
-    opacity: 0.35;
+    opacity: 0.3;
   }
   /* Highlighted state */
   .row.highlighted {
     background: rgba(52, 60, 237, 0.04);
+  }
+  /* What's New pulse */
+  .row.new-highlight {
+    background: rgba(21, 128, 61, 0.06);
+    animation: newPulse 2s ease-in-out;
+  }
+  @keyframes newPulse {
+    0% { background: rgba(21, 128, 61, 0.15); }
+    100% { background: rgba(21, 128, 61, 0.06); }
   }
 
   .conn {
@@ -166,7 +306,7 @@
     flex-shrink: 0;
   }
 
-  /* Section badges */
+  /* Section badges - linkable */
   .badge {
     display: inline-block;
     padding: 5px 14px;
@@ -177,6 +317,21 @@
     white-space: nowrap;
     flex-shrink: 0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  a.badge-link {
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: inline-block;
+    border-radius: 8px;
+  }
+  a.badge-link:hover .badge {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  a.badge-link:hover::after {
+    content: ' \2197';
+    font-size: 11px;
+    margin-left: 3px;
+    opacity: 0.6;
   }
   .b-blue   { background: #dbeafe; color: #1d4ed8; }
   .b-purple { background: #ede9fe; color: #6d28d9; }
@@ -266,19 +421,39 @@
     line-height: 1.6;
   }
 
-  /* Persona count badge */
-  .persona-count {
-    display: none;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 6px;
-    margin-left: 8px;
-    background: #343CED;
-    color: #fff;
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    body { padding: 20px 10px; }
+    .card { padding: 28px 18px 28px; border-radius: 20px; }
+    .header h1 { font-size: 26px; }
+    .subtitle { font-size: 13.5px; }
+    .controls-bar { flex-direction: column; align-items: stretch; }
+    .filter-bar { justify-content: center; }
+    .whats-new-toggle { align-self: center; }
+    .jump-nav { gap: 4px; }
+    .jump-btn { font-size: 10px; padding: 4px 8px; }
+    .legend { gap: 10px; padding: 10px 14px; }
+    .legend-item { font-size: 10px; }
+    .row { min-height: 34px; padding: 1px 4px; }
+    .conn { font-size: 12px; line-height: 34px; }
+    .name { font-size: 12px; }
+    .badge { font-size: 12px; padding: 4px 10px; }
+    .ann-text { font-size: 11px; }
+    .tag { font-size: 9px; padding: 2px 6px; margin-left: 6px; }
+    .icon { font-size: 14px; margin-right: 5px; }
+    .dots { margin: 0 6px; min-width: 10px; }
+    .filter-desc { font-size: 11px; padding: 5px 12px; }
   }
-  .filtering .persona-count { display: inline-block; }
+
+  @media (max-width: 480px) {
+    .card { padding: 20px 12px; }
+    .header h1 { font-size: 22px; }
+    .ann-text { display: none; }
+    .dots { display: none; }
+    .filter-btn { font-size: 10.5px; padding: 5px 10px; }
+    .legend { gap: 6px; }
+    .legend-item { font-size: 9px; }
+  }
 </style>
 </head>
 <body>
@@ -292,16 +467,48 @@
     <div class="callout-bubble">grounded in your company's knowledge</div>
   </div>
 
-  <!-- Filter Bar -->
-  <div class="filter-bar">
-    <span class="filter-label">View as:</span>
-    <button class="filter-btn active" data-persona="all">All</button>
-    <button class="filter-btn" data-persona="superadmin">Super Admin</button>
-    <button class="filter-btn" data-persona="admin">Admin</button>
-    <button class="filter-btn" data-persona="poweruser">Power User</button>
-    <button class="filter-btn" data-persona="general">General User</button>
+  <!-- Jump-to Navigation -->
+  <div class="jump-nav">
+    <span class="jump-label">Jump to:</span>
+    <a class="jump-btn" href="#connectors">Connectors</a>
+    <a class="jump-btn" href="#enterprise-graph">Enterprise Graph</a>
+    <a class="jump-btn" href="#people">People</a>
+    <a class="jump-btn" href="#assistant">Assistant</a>
+    <a class="jump-btn" href="#model-hub">Model Hub</a>
+    <a class="jump-btn" href="#skills">Skills</a>
+    <a class="jump-btn" href="#agents">Agents</a>
+    <a class="jump-btn" href="#sandbox">Sandbox</a>
+    <a class="jump-btn" href="#governance">Governance</a>
+    <a class="jump-btn" href="#mcp-api">MCP + API</a>
+  </div>
+
+  <!-- Controls: Filter + What's New -->
+  <div class="controls-bar">
+    <div class="filter-bar">
+      <span class="filter-label">View as:</span>
+      <button class="filter-btn active" data-persona="all">All</button>
+      <button class="filter-btn" data-persona="superadmin">Super Admin</button>
+      <button class="filter-btn" data-persona="admin">Admin</button>
+      <button class="filter-btn" data-persona="poweruser">Power User</button>
+      <button class="filter-btn" data-persona="general">General User</button>
+    </div>
+    <button class="whats-new-toggle" id="whatsNewBtn">
+      <span class="whats-new-dot"></span>
+      What's New
+    </button>
   </div>
   <div class="filter-desc" id="filterDesc"></div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="legend-title">Legend:</span>
+    <span class="legend-item"><span class="tag t-new">new</span> Recently launched</span>
+    <span class="legend-item"><span class="tag t-beta">beta</span> Early access</span>
+    <span class="legend-item"><span class="tag t-core">core</span> Core product</span>
+    <span class="legend-item"><span class="tag t-infra">foundation</span> Infrastructure layer</span>
+    <span class="legend-item"><span class="tag t-workflow">workflow</span> Automation</span>
+    <span class="legend-item"><span class="tag t-govern">security</span> Governance</span>
+  </div>
 
   <!-- Tree -->
   <div class="tree" id="tree">
@@ -317,11 +524,12 @@
     </div>
 
     <!-- ══ CONNECTORS ══ -->
+    <span class="section-anchor" id="connectors"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin">
       <span class="conn">├── </span>
       <span class="icon">🔌</span>
-      <span class="badge b-teal">connectors/</span>
+      <a class="badge-link" href="https://www.glean.com/product/connectors" target="_blank" rel="noopener"><span class="badge b-teal">connectors/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">100+ integrations that index your company's data</span>
@@ -344,7 +552,7 @@
         <span class="ann-text">CRM, code, support, wikis — every system of record</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin">
+    <div class="row" data-personas="superadmin" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">structured-data (SOQL, JQL, Databricks)</span>
       <div class="ann">
@@ -363,11 +571,12 @@
     </div>
 
     <!-- ══ ENTERPRISE GRAPH ══ -->
+    <span class="section-anchor" id="enterprise-graph"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin">
       <span class="conn">├── </span>
       <span class="icon">🕸️</span>
-      <span class="badge b-yellow">enterprise-graph/</span>
+      <a class="badge-link" href="https://www.glean.com/product/enterprise-knowledge-graph" target="_blank" rel="noopener"><span class="badge b-yellow">enterprise-graph/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">the intelligence layer — maps relationships between content, people, and activity</span>
@@ -398,7 +607,7 @@
         <span class="ann-text">views, edits, shares — learns what's relevant and what's stale</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general">
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">personal-graph</span>
       <div class="ann">
@@ -407,7 +616,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general">
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">enterprise-memory</span>
       <div class="ann">
@@ -416,7 +625,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general">
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">universal-knowledge</span>
       <div class="ann">
@@ -435,11 +644,12 @@
     </div>
 
     <!-- ══ PEOPLE ══ -->
+    <span class="section-anchor" id="people"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">├── </span>
       <span class="icon">👥</span>
-      <span class="badge b-pink">people/</span>
+      <a class="badge-link" href="https://www.glean.com/product/people" target="_blank" rel="noopener"><span class="badge b-pink">people/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">understand who works here, what they know, and how they connect</span>
@@ -472,11 +682,12 @@
     </div>
 
     <!-- ══ ASSISTANT ══ -->
+    <span class="section-anchor" id="assistant"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">├── </span>
       <span class="icon">💬</span>
-      <span class="badge b-purple">assistant/</span>
+      <a class="badge-link" href="https://www.glean.com/product/assistant" target="_blank" rel="noopener"><span class="badge b-purple">assistant/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">third-generation AI companion powered by your company's knowledge</span>
@@ -507,7 +718,7 @@
         <span class="ann-text">collaborative workspace — draft docs, build apps, generate slides</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general">
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="beta">
       <span class="conn">│   ├── </span>
       <span class="name">real-time-voice</span>
       <div class="ann">
@@ -516,7 +727,7 @@
         <span class="tag t-beta">beta</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general">
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="beta">
       <span class="conn">│   ├── </span>
       <span class="name">branded-slides</span>
       <div class="ann">
@@ -525,7 +736,7 @@
         <span class="tag t-beta">beta</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general">
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">proactive-insights</span>
       <div class="ann">
@@ -544,11 +755,12 @@
     </div>
 
     <!-- ══ MODEL HUB ══ -->
+    <span class="section-anchor" id="model-hub"></span>
     <div class="row gap"></div>
-    <div class="row" data-personas="superadmin admin poweruser">
+    <div class="row" data-personas="superadmin admin poweruser" data-status="new">
       <span class="conn">├── </span>
       <span class="icon">🧬</span>
-      <span class="badge b-cyan">model-hub/</span>
+      <a class="badge-link" href="https://www.glean.com/product/platform" target="_blank" rel="noopener"><span class="badge b-cyan">model-hub/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">15+ LLMs — choose the right model for every task</span>
@@ -573,11 +785,12 @@
     </div>
 
     <!-- ══ SKILLS ══ -->
+    <span class="section-anchor" id="skills"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">├── </span>
       <span class="icon">✨</span>
-      <span class="badge b-green">skills/</span>
+      <a class="badge-link" href="https://www.glean.com/product/apps-and-agents" target="_blank" rel="noopener"><span class="badge b-green">skills/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">reusable instruction sets — the open Agent Skills standard</span>
@@ -602,7 +815,7 @@
         <span class="ann-text">published, shared skill libraries across the org</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser">
+    <div class="row" data-personas="superadmin admin poweruser" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="icon">📂</span>
       <span class="name">ecosystem-skills/</span>
@@ -622,18 +835,19 @@
     </div>
 
     <!-- ══ AGENTS ══ -->
+    <span class="section-anchor" id="agents"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">├── </span>
       <span class="icon">🧠</span>
-      <span class="badge b-orange">agents/</span>
+      <a class="badge-link" href="https://www.glean.com/product/apps-and-agents" target="_blank" rel="noopener"><span class="badge b-orange">agents/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">automate complex workflows — governed, scoped, with their own identity</span>
         <span class="tag t-workflow">workflow automation</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser">
+    <div class="row" data-personas="superadmin admin poweruser" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">no-code-builder</span>
       <div class="ann">
@@ -642,7 +856,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin">
+    <div class="row" data-personas="superadmin admin" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">agentic-engine-2</span>
       <div class="ann">
@@ -691,7 +905,7 @@
         <span class="ann-text">name, avatar, suggested prompts — deployed to any team</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin">
+    <div class="row" data-personas="superadmin admin" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">orchestration</span>
       <div class="ann">
@@ -718,11 +932,12 @@
     </div>
 
     <!-- ══ AGENT SANDBOX ══ -->
+    <span class="section-anchor" id="sandbox"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">├── </span>
       <span class="icon">🔬</span>
-      <span class="badge b-teal">agent-sandbox/</span>
+      <a class="badge-link" href="https://www.glean.com/product/platform" target="_blank" rel="noopener"><span class="badge b-teal">agent-sandbox/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">secure, isolated runtime that gives Assistant a virtual computer for multi-step analysis</span>
@@ -738,7 +953,7 @@
         <span class="tag t-infra">runtime</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser">
+    <div class="row" data-personas="superadmin admin poweruser" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">PTC (programmatic-tool-calling)</span>
       <div class="ann">
@@ -789,11 +1004,12 @@
     </div>
 
     <!-- ══ GOVERNANCE ══ -->
+    <span class="section-anchor" id="governance"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin">
       <span class="conn">├── </span>
       <span class="icon">🛡️</span>
-      <span class="badge b-red">governance/</span>
+      <a class="badge-link" href="https://www.glean.com/product/governance" target="_blank" rel="noopener"><span class="badge b-red">governance/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">active data &amp; AI governance — control, compliance, and trust</span>
@@ -834,11 +1050,12 @@
     </div>
 
     <!-- ══ MCP + API ══ -->
+    <span class="section-anchor" id="mcp-api"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">└── </span>
       <span class="icon">🔗</span>
-      <span class="badge b-indigo">mcp + api/</span>
+      <a class="badge-link" href="https://www.glean.com/product/platform" target="_blank" rel="noopener"><span class="badge b-indigo">mcp + api/</span></a>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">Glean as the system of context — plug in wherever your team already works</span>
@@ -853,7 +1070,7 @@
         <span class="ann-text">bring Glean context into Claude, Cursor, ChatGPT, Copilot, and any MCP client</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin">
+    <div class="row" data-personas="superadmin admin" data-status="new">
       <span class="conn">    ├── </span>
       <span class="name">mcp-host</span>
       <div class="ann">
@@ -862,7 +1079,7 @@
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin">
+    <div class="row" data-personas="superadmin admin" data-status="new">
       <span class="conn">    ├── </span>
       <span class="name">mcp-server-directory</span>
       <div class="ann">
@@ -879,7 +1096,7 @@
         <span class="ann-text">read &amp; write to Salesforce, Jira, GitHub, Calendar, and more</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin">
+    <div class="row" data-personas="superadmin admin" data-status="new">
       <span class="conn">    ├── </span>
       <span class="name">tool-search</span>
       <div class="ann">
@@ -913,66 +1130,126 @@
     <br><br>
     <a href="https://www.glean.com/product/overview" target="_blank" rel="noopener" class="cta-btn">Explore the Platform</a>
     <br><br>
-    <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V1.2 — Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
+    <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V2.0 — Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
   </div>
 
 </div>
 
 <script>
+  // ── Persona filter descriptions ──
   const descriptions = {
     all: '',
-    superadmin: 'Full platform visibility — connectors, graph, governance, sandbox, MCP, and all configuration',
-    admin: 'Connector setup, governance, agent management, model selection, and org-wide skill publishing',
-    poweruser: 'Agent building, skill creation, sandbox workflows, MCP integrations, and advanced assistant features',
-    general: 'Search, chat, canvas, voice, personal skills, people lookup, and pre-built agents'
+    superadmin: 'Full platform visibility — connectors, graph internals, governance, sandbox runtime, MCP configuration, and all system controls',
+    admin: 'Connector setup, governance policies, agent management, model selection, org-wide skill publishing, and access controls',
+    poweruser: 'Agent building, skill creation, sandbox workflows, MCP integrations, code execution, and advanced assistant features',
+    general: 'Search, chat, canvas, voice, personal skills, people lookup, pre-built agents, and embedded integrations'
   };
 
-  const buttons = document.querySelectorAll('.filter-btn');
+  const filterButtons = document.querySelectorAll('.filter-btn');
   const rows = document.querySelectorAll('.row[data-personas]');
   const gaps = document.querySelectorAll('.row.gap');
   const descEl = document.getElementById('filterDesc');
+  const whatsNewBtn = document.getElementById('whatsNewBtn');
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const persona = btn.dataset.persona;
+  let activePersona = 'all';
+  let whatsNewActive = false;
 
-      // Update active button
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  // ── Apply visual state ──
+  function applyFilters() {
+    rows.forEach(r => {
+      const personas = r.dataset.personas;
+      const status = r.dataset.status;
+      let dimmed = false;
+      let highlighted = false;
+      let newHighlight = false;
 
-      // Update description
-      descEl.textContent = descriptions[persona];
-
-      if (persona === 'all') {
-        // Reset all
-        rows.forEach(r => {
-          r.classList.remove('dimmed', 'highlighted');
-        });
-        gaps.forEach(g => g.classList.remove('dimmed'));
-        return;
+      // Persona filter
+      if (activePersona !== 'all' && personas && !personas.includes(activePersona)) {
+        dimmed = true;
       }
 
-      // Apply filter
-      rows.forEach(r => {
-        const personas = r.dataset.personas;
-        if (personas && personas.includes(persona)) {
-          r.classList.remove('dimmed');
-          r.classList.add('highlighted');
+      // What's New filter
+      if (whatsNewActive) {
+        if (status === 'new' || status === 'beta') {
+          newHighlight = !dimmed;
         } else {
-          r.classList.add('dimmed');
-          r.classList.remove('highlighted');
+          dimmed = true;
         }
-      });
+      }
 
-      // Dim gaps that are between dimmed sections
-      gaps.forEach(g => {
-        const next = g.nextElementSibling;
-        if (next && next.classList.contains('dimmed')) {
-          g.classList.add('dimmed');
-        } else {
-          g.classList.remove('dimmed');
-        }
-      });
+      // Persona highlight (only when not dimmed and not in what's new mode)
+      if (activePersona !== 'all' && !dimmed && !whatsNewActive) {
+        highlighted = true;
+      }
+
+      r.classList.toggle('dimmed', dimmed);
+      r.classList.toggle('highlighted', highlighted);
+      r.classList.toggle('new-highlight', newHighlight);
+    });
+
+    // Dim gaps between dimmed sections
+    gaps.forEach(g => {
+      const next = g.nextElementSibling;
+      // Skip section anchors
+      let el = g.nextElementSibling;
+      while (el && (el.classList.contains('section-anchor') || el.tagName === 'SPAN')) {
+        el = el.nextElementSibling;
+      }
+      if (el && el.classList.contains('dimmed')) {
+        g.classList.add('dimmed');
+      } else {
+        g.classList.remove('dimmed');
+      }
+    });
+
+    // Update description
+    if (whatsNewActive) {
+      descEl.textContent = 'Showing recently launched and early access features across the platform';
+    } else {
+      descEl.textContent = descriptions[activePersona];
+    }
+  }
+
+  // ── Persona buttons ──
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activePersona = btn.dataset.persona;
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Turn off What's New when switching persona
+      if (whatsNewActive) {
+        whatsNewActive = false;
+        whatsNewBtn.classList.remove('active');
+      }
+
+      applyFilters();
+    });
+  });
+
+  // ── What's New toggle ──
+  whatsNewBtn.addEventListener('click', () => {
+    whatsNewActive = !whatsNewActive;
+    whatsNewBtn.classList.toggle('active');
+
+    // Reset persona to All when entering What's New
+    if (whatsNewActive) {
+      activePersona = 'all';
+      filterButtons.forEach(b => b.classList.remove('active'));
+      filterButtons[0].classList.add('active');
+    }
+
+    applyFilters();
+  });
+
+  // ── Smooth scroll for jump nav ──
+  document.querySelectorAll('.jump-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(btn.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 </script>
