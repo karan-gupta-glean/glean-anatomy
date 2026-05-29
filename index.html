@@ -344,6 +344,7 @@
   .b-red    { background: #fee2e2; color: #b91c1c; }
   .b-slate  { background: #e2e8f0; color: #334155; }
   .b-cyan   { background: #cffafe; color: #0e7490; }
+  .b-fuchsia{ background: #fae8ff; color: #a21caf; }
 
   /* Annotation */
   .ann {
@@ -471,15 +472,17 @@
   <div class="jump-nav">
     <span class="jump-label">Jump to:</span>
     <a class="jump-btn" href="#connectors">Connectors</a>
-    <a class="jump-btn" href="#enterprise-graph">Enterprise Graph</a>
+    <a class="jump-btn" href="#system-of-context">Context</a>
+    <a class="jump-btn" href="#search">Search</a>
     <a class="jump-btn" href="#people">People</a>
     <a class="jump-btn" href="#assistant">Assistant</a>
-    <a class="jump-btn" href="#model-hub">Model Hub</a>
+    <a class="jump-btn" href="#model-hub">Models</a>
     <a class="jump-btn" href="#skills">Skills</a>
     <a class="jump-btn" href="#agents">Agents</a>
     <a class="jump-btn" href="#sandbox">Sandbox</a>
-    <a class="jump-btn" href="#governance">Governance</a>
-    <a class="jump-btn" href="#mcp-api">MCP + API</a>
+    <a class="jump-btn" href="#protect">Protect</a>
+    <a class="jump-btn" href="#open-platform">Open Platform</a>
+    <a class="jump-btn" href="#work-surfaces">Surfaces</a>
   </div>
 
   <!-- Controls: Filter + What's New -->
@@ -570,41 +573,33 @@
       </div>
     </div>
 
-    <!-- ══ ENTERPRISE GRAPH ══ -->
-    <span class="section-anchor" id="enterprise-graph"></span>
+    <!-- ══ SYSTEM OF CONTEXT ══ -->
+    <span class="section-anchor" id="system-of-context"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin">
       <span class="conn">├── </span>
       <span class="icon">🕸️</span>
-      <a class="badge-link" href="https://www.glean.com/product/enterprise-knowledge-graph" target="_blank" rel="noopener"><span class="badge b-yellow">enterprise-graph/</span></a>
+      <a class="badge-link" href="https://www.glean.com/product/enterprise-knowledge-graph" target="_blank" rel="noopener"><span class="badge b-yellow">system-of-context/</span></a>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">the intelligence layer — maps relationships between content, people, and activity</span>
+        <span class="ann-text">the unified index of data, people, activity &amp; permissions — full context for every AI</span>
         <span class="tag t-infra">foundation</span>
-      </div>
-    </div>
-    <div class="row" data-personas="superadmin">
-      <span class="conn">│   ├── </span>
-      <span class="name">entity-extraction</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">identifies people, projects, products, and topics across all docs</span>
-      </div>
-    </div>
-    <div class="row" data-personas="superadmin">
-      <span class="conn">│   ├── </span>
-      <span class="name">relationship-mapping</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">connects documents to authors, teams, topics, and related content</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
-      <span class="name">activity-signals</span>
+      <span class="name">unified-index</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">views, edits, shares — learns what's relevant and what's stale</span>
+        <span class="ann-text">indexes content, activity, metadata &amp; permissions once — reused everywhere</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin">
+      <span class="conn">│   ├── </span>
+      <span class="name">enterprise-graph</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">maps relationships across people, projects, teams, customers, and work artifacts</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
@@ -621,17 +616,24 @@
       <span class="name">enterprise-memory</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">persistent memory layer that retains context across sessions</span>
+        <span class="ann-text">learns org language &amp; recurring work patterns, retaining context across sessions</span>
         <span class="tag t-new">new</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
+    <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
-      <span class="name">universal-knowledge</span>
+      <span class="name">activity-signals</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">combines enterprise data with real-time world knowledge</span>
-        <span class="tag t-new">new</span>
+        <span class="ann-text">views, edits, shares — learns what's relevant and what's stale</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">│   ├── </span>
+      <span class="name">grounding</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">anchors every answer in cited enterprise sources to control hallucination</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin">
@@ -640,6 +642,60 @@
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">every edge in the graph respects source-level access control</span>
+      </div>
+    </div>
+
+    <!-- ══ SEARCH ══ -->
+    <span class="section-anchor" id="search"></span>
+    <div class="row gap"></div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">├── </span>
+      <span class="icon">🔎</span>
+      <a class="badge-link" href="https://www.glean.com/product/workplace-search" target="_blank" rel="noopener"><span class="badge b-slate">search/</span></a>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">the retrieval foundation — find anything across every connected app, ranked for you</span>
+        <span class="tag t-core">core</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">│   ├── </span>
+      <span class="name">hybrid-search</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">keyword + semantic search fused for precision and recall</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">│   ├── </span>
+      <span class="name">personalization</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">results ranked by your role, team, and the personal graph</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">│   ├── </span>
+      <span class="name">permissions-aware-results</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">you only ever see what you'd see natively in each source app</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin">
+      <span class="conn">│   ├── </span>
+      <span class="name">real-time-indexing</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">new and updated content becomes searchable within seconds</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">│   └── </span>
+      <span class="name">grounded-answers</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">generative answers built on retrieved, cited enterprise content</span>
       </div>
     </div>
 
@@ -704,18 +760,36 @@
     </div>
     <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
-      <span class="name">search</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">semantic search across every connected app in one place</span>
-      </div>
-    </div>
-    <div class="row" data-personas="superadmin admin poweruser general">
-      <span class="conn">│   ├── </span>
       <span class="name">canvas</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">collaborative workspace — draft docs, build apps, generate slides</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
+      <span class="conn">│   ├── </span>
+      <span class="name">data-analysis</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">ask questions of your structured data — charts, pivots, and insights in chat</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
+      <span class="conn">│   ├── </span>
+      <span class="name">deep-research</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">autonomous multi-step research across internal + web sources, fully cited</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">│   ├── </span>
+      <span class="name">content-creation</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">draft docs, emails, and brand-aligned slides grounded in your knowledge</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin poweruser general" data-status="beta">
@@ -727,30 +801,13 @@
         <span class="tag t-beta">beta</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general" data-status="beta">
-      <span class="conn">│   ├── </span>
-      <span class="name">branded-slides</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">AI-generated presentations aligned with your brand guidelines</span>
-        <span class="tag t-beta">beta</span>
-      </div>
-    </div>
     <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
-      <span class="conn">│   ├── </span>
+      <span class="conn">│   └── </span>
       <span class="name">proactive-insights</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">surfaces relevant info before you ask — summaries, action items, reminders</span>
         <span class="tag t-new">new</span>
-      </div>
-    </div>
-    <div class="row" data-personas="superadmin admin">
-      <span class="conn">│   └── </span>
-      <span class="name">permissions-aware-index</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">users only see what they'd see natively in each source app</span>
       </div>
     </div>
 
@@ -849,19 +906,19 @@
     </div>
     <div class="row" data-personas="superadmin admin poweruser" data-status="new">
       <span class="conn">│   ├── </span>
-      <span class="name">no-code-builder</span>
+      <span class="name">agent-builder</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">describe what you want in plain English — visual graph-based editor</span>
+        <span class="ann-text">build reasoning agents in plain English — visual graph-based editor</span>
         <span class="tag t-new">new</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin" data-status="new">
       <span class="conn">│   ├── </span>
-      <span class="name">agentic-engine-2</span>
+      <span class="name">agentic-engine</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">next-gen reasoning — adaptive planning, Enterprise Graph-first signals</span>
+        <span class="ann-text">next-gen reasoning — plans steps, uses tools, adapts over company context</span>
         <span class="tag t-new">new</span>
       </div>
     </div>
@@ -889,45 +946,48 @@
         <span class="ann-text">what actions it can take — search, write, call APIs, trigger workflows</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin">
-      <span class="conn">│   ├── </span>
-      <span class="name">[agent].triggers</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">runs on schedule, on event, or when assistant routes to it automatically</span>
-      </div>
-    </div>
-    <div class="row" data-personas="superadmin admin poweruser">
-      <span class="conn">│   ├── </span>
-      <span class="name">[agent].identity</span>
-      <div class="ann">
-        <div class="dots"></div>
-        <span class="ann-text">name, avatar, suggested prompts — deployed to any team</span>
-      </div>
-    </div>
     <div class="row" data-personas="superadmin admin" data-status="new">
       <span class="conn">│   ├── </span>
       <span class="name">orchestration</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">event triggers, inter-agent routing, cross-system execution</span>
+        <span class="ann-text">trigger on events, route tasks across systems, coordinate multi-agent workflows</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin" data-status="new">
+      <span class="conn">│   ├── </span>
+      <span class="name">agent-governance</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">permissions-aware guardrails, review, and oversight on every agent action</span>
+        <span class="tag t-govern">security</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin" data-status="new">
+      <span class="conn">│   ├── </span>
+      <span class="name">agent-observability</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">track adoption, failures, feedback, and ROI to improve agents over time</span>
         <span class="tag t-new">new</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">│   ├── </span>
-      <span class="name">pre-built-agents</span>
+      <span class="name">agent-library</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">dozens of out-of-the-box agents for common enterprise workflows</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin poweruser general">
+    <div class="row" data-personas="superadmin admin" data-status="new">
       <span class="conn">│   └── </span>
-      <span class="name">embedded-integrations</span>
+      <span class="name">deployment-and-certification</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">run agents in Slack, Teams, Salesforce, Zendesk, ServiceNow, Zoom, GitHub Copilot</span>
+        <span class="ann-text">roll out, share, and certify agents to scale adoption like enterprise software</span>
+        <span class="tag t-new">new</span>
       </div>
     </div>
 
@@ -1003,22 +1063,38 @@
       </div>
     </div>
 
-    <!-- ══ GOVERNANCE ══ -->
-    <span class="section-anchor" id="governance"></span>
+    <!-- ══ PROTECT ══ -->
+    <span class="section-anchor" id="protect"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin">
       <span class="conn">├── </span>
       <span class="icon">🛡️</span>
-      <a class="badge-link" href="https://www.glean.com/product/governance" target="_blank" rel="noopener"><span class="badge b-red">governance/</span></a>
+      <a class="badge-link" href="https://www.glean.com/product/governance" target="_blank" rel="noopener"><span class="badge b-red">protect/</span></a>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">active data &amp; AI governance — control, compliance, and trust</span>
+        <span class="ann-text">Glean Protect — permissions, runtime validation, and trust across all AI</span>
         <span class="tag t-govern">security</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
-      <span class="name">data-scanning</span>
+      <span class="name">permissions-enforcement</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">every query &amp; action respects source-level access control</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin">
+      <span class="conn">│   ├── </span>
+      <span class="name">single-tenant-cloud</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">your data stays in a dedicated, isolated cloud tenant</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin">
+      <span class="conn">│   ├── </span>
+      <span class="name">sensitive-content-protection</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">continuous scanning &amp; remediation of overshared sensitive data</span>
@@ -1032,9 +1108,18 @@
         <span class="ann-text">100+ predefined infotypes — SSNs, credentials, PII, custom terms</span>
       </div>
     </div>
+    <div class="row" data-personas="superadmin admin" data-status="new">
+      <span class="conn">│   ├── </span>
+      <span class="name">action-validation</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">intelligently validates every agent action at runtime before it executes</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
     <div class="row" data-personas="superadmin admin">
       <span class="conn">│   ├── </span>
-      <span class="name">agent-permissions</span>
+      <span class="name">agent-guardrails</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">granular sharing, scoping, and sprawl prevention for all agents</span>
@@ -1049,21 +1134,47 @@
       </div>
     </div>
 
-    <!-- ══ MCP + API ══ -->
-    <span class="section-anchor" id="mcp-api"></span>
+    <!-- ══ OPEN PLATFORM ══ -->
+    <span class="section-anchor" id="open-platform"></span>
     <div class="row gap"></div>
     <div class="row" data-personas="superadmin admin poweruser">
-      <span class="conn">└── </span>
+      <span class="conn">├── </span>
       <span class="icon">🔗</span>
-      <a class="badge-link" href="https://www.glean.com/product/platform" target="_blank" rel="noopener"><span class="badge b-indigo">mcp + api/</span></a>
+      <a class="badge-link" href="https://www.glean.com/product/platform" target="_blank" rel="noopener"><span class="badge b-indigo">open-platform/</span></a>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">Glean as the system of context — plug in wherever your team already works</span>
+        <span class="ann-text">APIs, SDKs &amp; MCP — build on Glean and reach any agent framework</span>
         <span class="tag t-context">open platform</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin poweruser">
-      <span class="conn">    ├── </span>
+      <span class="conn">│   ├── </span>
+      <span class="name">rest-api (search, chat, agent)</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">embed Glean search, chat, and agents into any internal app or workflow</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser" data-status="new">
+      <span class="conn">│   ├── </span>
+      <span class="name">indexing-sdk</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">push any internal source into the index programmatically</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser" data-status="new">
+      <span class="conn">│   ├── </span>
+      <span class="name">web-sdk</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">drop Glean search &amp; chat UI directly into your own web apps</span>
+        <span class="tag t-new">new</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser">
+      <span class="conn">│   ├── </span>
       <span class="name">glean-mcp-server</span>
       <div class="ann">
         <div class="dots"></div>
@@ -1071,8 +1182,8 @@
       </div>
     </div>
     <div class="row" data-personas="superadmin admin" data-status="new">
-      <span class="conn">    ├── </span>
-      <span class="name">mcp-host</span>
+      <span class="conn">│   ├── </span>
+      <span class="name">remote-mcp-servers</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">Glean agents call external MCP servers for cross-platform actions</span>
@@ -1080,7 +1191,7 @@
       </div>
     </div>
     <div class="row" data-personas="superadmin admin" data-status="new">
-      <span class="conn">    ├── </span>
+      <span class="conn">│   ├── </span>
       <span class="name">mcp-server-directory</span>
       <div class="ann">
         <div class="dots"></div>
@@ -1089,36 +1200,66 @@
       </div>
     </div>
     <div class="row" data-personas="superadmin admin poweruser">
-      <span class="conn">    ├── </span>
-      <span class="name">native-actions (100+)</span>
+      <span class="conn">│   ├── </span>
+      <span class="name">custom-actions (100+)</span>
       <div class="ann">
         <div class="dots"></div>
         <span class="ann-text">read &amp; write to Salesforce, Jira, GitHub, Calendar, and more</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin" data-status="new">
-      <span class="conn">    ├── </span>
-      <span class="name">tool-search</span>
+      <span class="conn">│   └── </span>
+      <span class="name">framework-integrations</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">agents auto-identify the most relevant tools based on task intent</span>
+        <span class="ann-text">OpenAI, LangChain, LangGraph, CrewAI, Google ADK, N8N — governed through Glean</span>
         <span class="tag t-new">new</span>
+      </div>
+    </div>
+
+    <!-- ══ WORK SURFACES ══ -->
+    <span class="section-anchor" id="work-surfaces"></span>
+    <div class="row gap"></div>
+    <div class="row" data-personas="superadmin admin poweruser general" data-status="new">
+      <span class="conn">└── </span>
+      <span class="icon">🧩</span>
+      <a class="badge-link" href="https://www.glean.com/product/work-ai" target="_blank" rel="noopener"><span class="badge b-fuchsia">work-surfaces/</span></a>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">the last mile — Glean shows up where your team already works</span>
+        <span class="tag t-context">embedded</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">    ├── </span>
+      <span class="name">slack, microsoft-teams</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">answers, proactive summaries, and workflow automation inside chat</span>
+      </div>
+    </div>
+    <div class="row" data-personas="superadmin admin poweruser general">
+      <span class="conn">    ├── </span>
+      <span class="name">zoom, service-cloud, servicenow, zendesk</span>
+      <div class="ann">
+        <div class="dots"></div>
+        <span class="ann-text">surface Glean inside meetings and the service desk</span>
       </div>
     </div>
     <div class="row" data-personas="superadmin admin poweruser">
       <span class="conn">    ├── </span>
-      <span class="name">rest-api</span>
+      <span class="name">github, miro</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">embed Glean search, chat, and agents into any internal app or workflow</span>
+        <span class="ann-text">bring company context into code and the whiteboard</span>
       </div>
     </div>
-    <div class="row" data-personas="superadmin admin">
+    <div class="row" data-personas="superadmin admin poweruser general">
       <span class="conn">    └── </span>
-      <span class="name">3p-agent-registry</span>
+      <span class="name">browser-extension</span>
       <div class="ann">
         <div class="dots"></div>
-        <span class="ann-text">register external agents (LangGraph, N8N, ADK) — governed through Glean</span>
+        <span class="ann-text">Glean search &amp; assistant on any web page, in any app</span>
       </div>
     </div>
 
@@ -1130,7 +1271,7 @@
     <br><br>
     <a href="https://www.glean.com/product/overview" target="_blank" rel="noopener" class="cta-btn">Explore the Platform</a>
     <br><br>
-    <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V2.0 — Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
+    <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V2.1 — Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
   </div>
 
 </div>
@@ -1139,10 +1280,10 @@
   // ── Persona filter descriptions ──
   const descriptions = {
     all: '',
-    superadmin: 'Full platform visibility — connectors, graph internals, governance, sandbox runtime, MCP configuration, and all system controls',
-    admin: 'Connector setup, governance policies, agent management, model selection, org-wide skill publishing, and access controls',
-    poweruser: 'Agent building, skill creation, sandbox workflows, MCP integrations, code execution, and advanced assistant features',
-    general: 'Search, chat, canvas, voice, personal skills, people lookup, pre-built agents, and embedded integrations'
+    superadmin: 'Full platform visibility — connectors, system of context, Protect, sandbox runtime, open-platform configuration, and all system controls',
+    admin: 'Connector setup, Protect policies, agent management & governance, model selection, org-wide skill publishing, and access controls',
+    poweruser: 'Agent building, skill creation, sandbox workflows, open-platform integrations, code execution, and advanced assistant features',
+    general: 'Search, chat, canvas, data analysis, deep research, voice, personal skills, people lookup, agent library, and embedded work surfaces'
   };
 
   const filterButtons = document.querySelectorAll('.filter-btn');
